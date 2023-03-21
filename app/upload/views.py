@@ -9,7 +9,7 @@ def image_upload(request):
         filename = fs.save(image_file.name, image_file)
         image_url = fs.url(filename)
         print(image_url)
-        return render(request, "upload.html", {
+        return render(request, "upload/upload.html", {
             "image_url": image_url
         })
     return render(request, "upload/upload.html")
