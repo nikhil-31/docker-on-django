@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'debug_toolbar',
-    'upload',
-    'tasks',
     'storages',
-    'search',
+    'rest_framework',
+    'upload.apps.UploadConfig',
+    'tasks.apps.TasksConfig',
+    'search.apps.SearchConfig',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -187,4 +189,10 @@ CELERY_BEAT_SCHEDULE = {
         "task": "tasks.tasks.sample_task",
         "schedule": crontab(minute="*/1"),
     },
+}
+
+# Django REST framework
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 25
 }

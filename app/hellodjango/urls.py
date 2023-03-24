@@ -13,6 +13,7 @@ urlpatterns = [
     path("tasks/<task_id>/", get_status, name="get_status"),
     path("tasks/", run_task, name="run_task"),
     path("search/", include("search.urls")),
+    path("blog/", include('blog.urls')),
     path("__debug__/", include(debug_toolbar.urls)),
 ]
 
