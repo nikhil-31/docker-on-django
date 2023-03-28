@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'storages',
     'rest_framework',
+    # 'django_elasticsearch_dsl',
     'upload.apps.UploadConfig',
     'tasks.apps.TasksConfig',
     'search.apps.SearchConfig',
@@ -196,3 +197,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 25
 }
+
+# # Elastic search
+# # Elasticsearch
+# # https://django-elasticsearch-dsl.readthedocs.io/en/latest/settings.html
+# 
+# ELASTICSEARCH_DSL = {
+#     'default': {
+#         'hosts': 'localhost:9200'
+#     },
+# }
