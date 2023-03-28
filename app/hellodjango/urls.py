@@ -14,6 +14,7 @@ urlpatterns = [
     path("tasks/", run_task, name="run_task"),
     path("search/", include("search.urls")),
     path("blog/", include('blog.urls')),
+    path("cache/", include('cacheredis.urls')),
     path("__debug__/", include(debug_toolbar.urls)),
 ]
 

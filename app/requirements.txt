@@ -9,6 +9,8 @@ flower==1.2.0
 boto3==1.26.59
 django-storages==1.13.2
 djangorestframework==3.12.4
+requests==2.26.0
+django-redis==5.0.0
 
 # Elasticsearch
 elasticsearch==7.14.0

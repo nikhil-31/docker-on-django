@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'tasks.apps.TasksConfig',
     'search.apps.SearchConfig',
     'blog.apps.BlogConfig',
+    'cacheredis.apps.CacheredisConfig',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'hellodjango.middleware.metric_middleware'
 ]
 
 ROOT_URLCONF = 'hellodjango.urls'
@@ -201,9 +203,19 @@ REST_FRAMEWORK = {
 # # Elastic search
 # # Elasticsearch
 # # https://django-elasticsearch-dsl.readthedocs.io/en/latest/settings.html
-# 
+#
 # ELASTICSEARCH_DSL = {
 #     'default': {
 #         'hosts': 'localhost:9200'
 #     },
 # }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
