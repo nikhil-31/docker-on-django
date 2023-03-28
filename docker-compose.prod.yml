@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   web:
-    build: 
+    build:
       context: ./app
       dockerfile: Dockerfile_prod
     command: gunicorn hellodjango.wsgi:application --bind 0.0.0.0:8000
@@ -10,7 +10,7 @@ services:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
       - logs_volume:/home/app/web/logs
-    expose: 
+    expose:
       - 8000
     env_file:
       - ./app/.env.prod
@@ -50,9 +50,6 @@ services:
       - web
       - redis
   
-  redis:
-    image: redis:7-alpine
-    
   flower_dashboard:
     build:
       context: ./app
@@ -66,10 +63,13 @@ services:
       - web
       - redis
       - celery
-
-
   
-  
+  redis:
+    image: redis:7-alpine
+      
+#  memcached:
+#    image: memcached:1.6.17-alpine3.16
+
 volumes:
   postgres_data:
   static_volume:
