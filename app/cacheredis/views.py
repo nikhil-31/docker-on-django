@@ -9,7 +9,7 @@ BASE_URL = 'https://httpbin.org'
 
 
 # Create your views here.
-# @method_decorator(cache_page(60 * 5), name='dispatch')
+@method_decorator(cache_page(60 * 5), name='dispatch')
 class APICalls(TemplateView):
     template_name = "home.html"
 
