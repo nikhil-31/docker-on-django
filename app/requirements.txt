@@ -12,6 +12,7 @@ djangorestframework==3.12.4
 requests==2.26.0
 django-redis==5.0.0
 pymemcache==3.5.0
+django-lifecycle==0.9.1
 
 # Elasticsearch
 elasticsearch==7.14.0
