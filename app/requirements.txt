@@ -13,6 +13,9 @@ requests==2.26.0
 django-redis==5.0.0
 pymemcache==3.5.0
 django-lifecycle==0.9.1
+bpython==0.24
+django-extensions==3.2.1
+ipython==8.12.0
 
 # Elasticsearch
 elasticsearch==7.14.0

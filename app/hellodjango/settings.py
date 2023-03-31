@@ -31,7 +31,7 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(" ")
 CSRF_TRUSTED_ORIGINS = ["http://localhost:1337"]
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,16 +39,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
+]
+
+THIRD_PARTY_APPS = [
     'debug_toolbar',
     'storages',
     'rest_framework',
-    # 'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl',
+    'django_extensions',
+]
+
+LOCAL_APPS = [
     'upload.apps.UploadConfig',
     'tasks.apps.TasksConfig',
     'search.apps.SearchConfig',
     'blog.apps.BlogConfig',
     'cacheredis.apps.CacheredisConfig',
 ]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -197,23 +206,23 @@ CELERY_BEAT_SCHEDULE = {
 # Django REST framework
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 25
+    'PAGE_SIZE': 25,
 }
 
 # # Elastic search
 # # Elasticsearch
 # # https://django-elasticsearch-dsl.readthedocs.io/en/latest/settings.html
 #
-# ELASTICSEARCH_DSL = {
-#     'default': {
-#         'hosts': 'localhost:9200'
-#     },
-# }
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': os.environ.get("ELASTIC_SEARCH", "elasticsearch:9200")
+    },
+}
 
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://redis:6379/1',
+        'LOCATION': os.environ.get("REDIS_CACHE", "redis://redis:6379/1"),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }

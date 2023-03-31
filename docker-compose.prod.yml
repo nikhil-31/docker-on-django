@@ -10,6 +10,7 @@ services:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
       - logs_volume:/home/app/web/logs
+      - ./app:/home/app/web:z
     expose:
       - 8000
     env_file:
@@ -17,6 +18,7 @@ services:
     depends_on:
       - db
       - redis
+      - elasticsearch
   
   db:
     image: postgres:13.0-alpine
@@ -66,6 +68,25 @@ services:
   
   redis:
     image: redis:7-alpine
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - es-data01:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  
+  kibana:
+    image: kibana:7.14.0
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
       
 #  memcached:
 #    image: memcached:1.6.17-alpine3.16
@@ -75,3 +96,4 @@ volumes:
   static_volume:
   media_volume:
   logs_volume:
+  es-data01:
