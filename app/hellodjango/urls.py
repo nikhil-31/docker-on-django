@@ -15,8 +15,10 @@ urlpatterns = [
     path("search/", include("search.urls")),
     path("blog/", include('blog.urls')),
     path("cache/", include('cacheredis.urls')),
+    path("polls/", include('polls.urls')),
     path("__debug__/", include(debug_toolbar.urls)),
 ]
 
 if bool(settings.DEBUG):
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

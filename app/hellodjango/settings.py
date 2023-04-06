@@ -55,6 +55,7 @@ LOCAL_APPS = [
     'search.apps.SearchConfig',
     'blog.apps.BlogConfig',
     'cacheredis.apps.CacheredisConfig',
+    'polls.apps.PollsConfig'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
