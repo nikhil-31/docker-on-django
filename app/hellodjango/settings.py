@@ -31,6 +31,10 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(" ")
 CSRF_TRUSTED_ORIGINS = ["http://localhost:1337"]
 # Application definition
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000'
+]
+
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,6 +51,8 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'django_elasticsearch_dsl',
     'django_extensions',
+    'corsheaders',
+    'graphene_django',
 ]
 
 LOCAL_APPS = [
@@ -55,7 +61,8 @@ LOCAL_APPS = [
     'search.apps.SearchConfig',
     'blog.apps.BlogConfig',
     'cacheredis.apps.CacheredisConfig',
-    'polls.apps.PollsConfig'
+    'polls.apps.PollsConfig',
+    'todo.apps.TodoConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -69,7 +76,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'hellodjango.middleware.metric_middleware'
+    'hellodjango.middleware.metric_middleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'hellodjango.urls'
@@ -78,6 +86,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+            BASE_DIR / "templates"
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -232,4 +241,8 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
         'LOCATION': 'memcached:11211',
     }
+}
+
+GRAPHENE = {
+    "SCHEMA": "blog.schema.schema",
 }

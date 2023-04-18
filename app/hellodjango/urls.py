@@ -16,6 +16,7 @@ urlpatterns = [
     path("blog/", include('blog.urls')),
     path("cache/", include('cacheredis.urls')),
     path("polls/", include('polls.urls')),
+    path("todos/", include('todo.urls')),
     path("__debug__/", include(debug_toolbar.urls)),
 ]
 
