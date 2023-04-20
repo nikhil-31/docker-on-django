@@ -63,6 +63,7 @@ LOCAL_APPS = [
     'cacheredis.apps.CacheredisConfig',
     'polls.apps.PollsConfig',
     'todo.apps.TodoConfig',
+    'graphqlserver.apps.GraphqlserverConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
